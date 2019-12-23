@@ -90,7 +90,7 @@ class ServerlessS3Sync {
               s.params.forEach((param) => {
                 const glob = Object.keys(param)[0];
                 if(minimatch(localFile, `${path.resolve(localDir)}/${glob}`)) {
-                  Object.assign(s3Params, this.extractMetaParams(param) || {});
+                  Object.assign(s3Params, param[glob] || {});	
                 }
               });
             }
@@ -179,14 +179,6 @@ class ServerlessS3Sync {
       });
   }
 
-  extractMetaParams(config) {
-    const validParams = {};
-    const keys = Object.keys(config);
-    for (let i = 0; i < keys.length; i++) {
-      Object.assign(validParams, config[keys[i]])
-    }
-    return validParams;
-  }
 }
 
 module.exports = ServerlessS3Sync;

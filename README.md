@@ -2,6 +2,8 @@
 
 > A plugin to sync local directories and S3 prefixes for Serverless Framework :zap: .
 
+Forked from [s3-sync](https://github.com/k1LoW/serverless-s3-sync)
+
 ## Use Case
 
 - Static Website ( `serverless-s3-sync` ) & Contact form backend ( `serverless` ) .
@@ -30,6 +32,9 @@ custom:
     - bucketName: my-static-site-assets # required
       bucketPrefix: assets/ # optional
       localDir: dist/assets # required
+      deleteRemoved: false # optional - great for SPA where you don't want to immediately delete old files as caches rely upon them.
+      Metadata: 
+        KeyValue: stringValue
     - bucketName: my-other-site
       localDir: path/to/other-site
       acl: public-read # optional
